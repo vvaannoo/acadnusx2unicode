@@ -97,22 +97,20 @@ sub AcadNusxToUnicode
 end sub
 
 
-function ReplaceChar(fontName as string, searchChar as string, replaceChar as string)
+sub ReplaceChar(optional fontName as string, optional searchChar as string, optional replaceWithChar as string)
 	Dim Attributes(0) As New com.sun.star.beans.PropertyValue
 	Dim oReplace as Object
 	
 	Attributes(0).Name = "CharFontName"
 	Attributes(0).Value = fontName
-	
+
 	oReplace = ThisComponent.createReplaceDescriptor()
 	oReplace.setSearchString( searchChar )
 	oReplace.setSearchAttributes(Attributes())
-	oReplace.setReplaceString( replaceChar )
+	oReplace.setReplaceString( replaceWithChar )
 	oReplace.SearchRegularExpression = False
 	oReplace.SearchCaseSensitive = True
 	
 	Writer_ReplaceAll_Paragraph_Breaks_With_Linefeeds = ThisComponent.replaceAll( oReplace )
 
-end function
-
-
+end sub
